@@ -1,15 +1,25 @@
+# This file substitutes commands like teh one below
+# docker run -d (<port>) -p 80:3000  (<map-to-site>) -v $(pwd):/site (<image>) bretfisher/jekyll-serve
+
+# This file is called with "docker-compose up"
+
 version: '3'
+
 services:
+  # App container
   app:
-    container_name: docker-node-mongo
-    restart: always
-    build: .
+    container_name: docker-node-mongo # Containers name
+    restart: always # If fails, restart
+    build: . # Define where to build app
     ports:
-      - '80:3000'
+      - '8080:3000' # port 80 in local machine and 3000 on container (this is defined in dockerfile)
     links:
-      - mongo
+      - mongo # link to mongo container defined below
+
+  # DB/Mongo container
   mongo:
     container_name: mongo
-    image: mongo
+    image: mongo # define image (pulling image from dockerhub)
     ports:
-      - '27017:27017'
+      - '27017:27017' # port 27017 in local machine and 27017 on container
+

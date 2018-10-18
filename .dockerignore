@@ -1,2 +1,3 @@
+## To increase the build’s performance, exclude files and directories
 node_modules
 npm-debug.log
